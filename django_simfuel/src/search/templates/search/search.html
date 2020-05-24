@@ -1,0 +1,213 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<link href="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.css" rel="stylesheet">
+
+<script src="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.js"></script>
+
+<script src="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table-locale-all.min.js"></script>
+
+<script src="https://unpkg.com/tableexport.jquery.plugin/tableExport.min.js"></script>
+<script src="https://unpkg.com/bootstrap-table@1.16.0/dist/extensions/export/bootstrap-table-export.min.js"></script>
+
+
+
+<div id="form-wrapper">
+  <form id="form">
+      <div class="flex-wrapper">
+          <div style="flex: 6">
+              <form class="form-inline my-2 my-lg-0">
+                  <div id = 'dbList' class= 'row mt-2 mb-2 ml-2 mr-2' name=dbList>
+                  </div>   
+                  <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name=q>
+                  <button href = "search.html" class="btn btn-outline-success my-2 my-sm-0" type="button-link">Search</button>
+              </form>
+              <form method='POST'> {% csrf_token %}
+                {{ form.as_p}}
+                <input type='submit' value='Save' />
+              </form>
+          </div>
+      </div>
+  </form>
+</div>
+
+<table id="table" 
+  data-detail-view="true"
+  data-detail-view-icon="false"
+  data-detail-view-by-click="true"
+  >
+</table>	
+
+<script type="text/javascript">
+  // test function
+
+  // list available databases
+  var dataBaseList = {'CRC World Fuel Survey 2006':{'description':'Awesome description'},
+                 'Brazil Fuels':{'description':'Awesome description'},
+                 'DLR':{'description':'Awesome description'},
+ }
+ var htmlId = 'dbList'
+  window.onload = listDatabases(htmlId, dataBaseList);
+
+  // Primary Search Table
+  function expandTable($detail, index, row, data) {
+    var html = []
+    var header = row['detail']['header']
+    $.each(header, function (key, value) {
+      html.push('<p><b>' + key + ':</b> ' + value + '</p>')
+    })
+    accordion = accordionDetailFuelData(row['id'],row['detail']['properties'])
+    
+    html.push(accordion)
+
+    html.push(`<a href="edit/${row['id']}" class="btn btn-primary mt-3" type="button">Edit</a>`)
+
+    $detail.html(html)
+  }
+  function searchTable(data){
+        var $table = $('#table');
+        var $data = data
+        var columnNames = Object.keys(data[0])
+        columnNames = columnNames.filter(function(x) { return x !== 'detail' })
+        var $columns = []
+        $.each(columnNames, function (key) {
+
+        $columns.push({
+          field: columnNames[key],
+          title: columnNames[key],
+          sortable: true,
+          align: 'center'
+        })
+        })
+
+
+        $(function () {
+          $('#table').bootstrapTable('destroy').bootstrapTable({
+      onExpandRow: function (index, row, $detail, $data) {
+        /* eslint no-use-before-define: ["error", { "functions": false }]*/
+        expandTable($detail, index, row, data)
+      },
+      data: $data,
+      height: 550,
+      columns: $columns
+  })
+  })
+  }
+
+ 
+ // Card View of Available Databases
+
+ function listDatabases(htmlId,dataBaseList){
+  var html= []
+  var i=0
+  for (var db in dataBaseList){
+    html.push(
+      `
+      <div id="card ${i}" class="card flex-row flex-wrap text-right ml-1 style="height: 8rem;">
+        <div class="card-header border-0">
+            <img src="//placehold.it/50" alt="" style="height: 5rem;">
+        </div>
+        <div class="card-block px-2">
+            <h5 id="card-title ${i}" class="card-title mt-2">${db}</h5>
+            <p class="card-text">${dataBaseList[db]['description']}</p>
+            <button id="cardButton ${i}" class="btn btn-primary mb-2" type="button" onclick="addDbToSelect(this, {{ form.selectedDB.value }})">Add</button>
+        </div>
+    </div>
+      `
+    )
+    i++
+  }
+  var dbList =document.getElementById(htmlId)
+  dbList.innerHTML+=html.join('')
+ }
+ var selectedDb = []
+ function addDbToSelect(self,sDB){
+  console.log(sDB)
+   sDB='aaa'
+   console.log(sDB)
+   var buttonId = self.id.split(' ')
+   var id = buttonId[buttonId.length-1]
+   var dbName = document.getElementById('card-title '+id).innerHTML
+   if (selectedDb.includes(dbName)){
+    self.className = "btn btn-primary"
+    self.innerHTML = "Add"
+    var buttonId = self.id.split(' ')
+    var card = document.getElementById('card '+id)
+    card.style.background  = "white"
+    const index = selectedDb.indexOf(dbName);
+    if (index > -1) {
+      selectedDb.splice(index, 1);
+    }
+   }
+   else {
+    self.className = "btn btn-danger"
+    self.innerHTML = "Remove"
+    var buttonId = self.id.split(' ')
+    var id = buttonId[buttonId.length-1]
+    var card = document.getElementById('card '+id)
+    card.style.background  = "PaleGreen"
+    dbName = document.getElementById('card-title '+id)
+    selectedDb.push(dbName.innerHTML)
+
+   }
+  
+ }
+
+ // accordion with detail view of fuel data
+ function accordionDetailFuelData(id, data){
+   customBootstrapTable(id,data)
+   html = `
+  <div id="accordion">
+    <div class="card" id="card${id}">
+      <div class="card-header" id="heading${id}">
+        <h5 class="mb-0">
+          <button id="card-btn${id}" class="btn btn" data-toggle="collapse" data-target="#collapse${id}" aria-expanded="false" aria-controls="#collapse${id}">Properties</button>
+        </h5>
+      </div>
+      <div id="collapse${id}" class="collapse show" aria-labelledby="heading${id}" data-parent="#accordion">
+        <div class="card-body">
+          <table id=table${id}
+          >
+        </table>	
+        </div>
+      </div>
+    </div>
+  </div>
+`	;
+  return(html)
+}
+
+function customBootstrapTable(id,data){
+
+  var $table = $(`#table${id}`);
+  var $data = data
+  var columnNames = ["property","test_method","unit","value","information"]
+  var $columns = []
+  $.each(columnNames, function (key) {
+
+  $columns.push({
+    field: columnNames[key],
+    title: columnNames[key],
+    sortable: true,
+    align: 'center'
+  })
+  })
+
+  $(function () {
+    $(`#table${id}`).bootstrapTable('destroy').bootstrapTable({
+data: $data,
+columns: $columns
+})
+})
+
+
+}
+
+</script>
+ 
+{% endblock %}
+
+
+
