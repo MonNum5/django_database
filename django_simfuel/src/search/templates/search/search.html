@@ -2,6 +2,7 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 <link href="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.css" rel="stylesheet">
 
@@ -19,14 +20,15 @@
       <div class="flex-wrapper">
           <div style="flex: 6">
               <form class="form-inline my-2 my-lg-0">
-                  <div id = 'dbList' class= 'row mt-2 mb-2 ml-2 mr-2' name=dbList>
-                  </div>   
-                  <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name=q>
-                  <button href = "search.html" class="btn btn-outline-success my-2 my-sm-0" type="button-link">Search</button>
+                  <div id = 'dbList' class= 'row mt-2 mb-2 ml-2 mr-2'>
+                  </div> 
               </form>
               <form method='POST'> {% csrf_token %}
-                {{ form.as_p}}
-                <input type='submit' value='Save' />
+                {{ form.search|as_crispy_field }}
+                <div class= 'row mt-2 mb-2 ml-2 mr-2'>
+                </div> 
+                <input class = 'btn btn-success' type='submit' value='Save' />
+                <input type="hidden" id ="selectedDbField" name = "selectedDbField" value=''>
               </form>
           </div>
       </div>
@@ -41,8 +43,6 @@
 </table>	
 
 <script type="text/javascript">
-  // test function
-
   // list available databases
   var dataBaseList = {'CRC World Fuel Survey 2006':{'description':'Awesome description'},
                  'Brazil Fuels':{'description':'Awesome description'},
@@ -112,7 +112,7 @@
         <div class="card-block px-2">
             <h5 id="card-title ${i}" class="card-title mt-2">${db}</h5>
             <p class="card-text">${dataBaseList[db]['description']}</p>
-            <button id="cardButton ${i}" class="btn btn-primary mb-2" type="button" onclick="addDbToSelect(this, {{ form.selectedDB.value }})">Add</button>
+            <button id="cardButton ${i}" class="btn btn-primary mb-2" type="button" onclick="addDbToSelect(this)">Add</button>
         </div>
     </div>
       `
@@ -124,9 +124,7 @@
  }
  var selectedDb = []
  function addDbToSelect(self,sDB){
-  console.log(sDB)
-   sDB='aaa'
-   console.log(sDB)
+   
    var buttonId = self.id.split(' ')
    var id = buttonId[buttonId.length-1]
    var dbName = document.getElementById('card-title '+id).innerHTML
@@ -152,7 +150,8 @@
     selectedDb.push(dbName.innerHTML)
 
    }
-  
+   var selectedDbField = document.getElementById('selectedDbField')
+   selectedDbField['value'] = selectedDb
  }
 
  // accordion with detail view of fuel data
