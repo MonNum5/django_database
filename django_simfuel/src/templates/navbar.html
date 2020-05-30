@@ -6,14 +6,36 @@
   
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="/search">Search <span class="sr-only">(current)</span></a>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Jet Fuel Database
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="/search">Search</a>
+            <a class="dropdown-item" href="#">Create new entry</a>
+            <a class="dropdown-item" href="/databases/register/">Register new Collection</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="notebooks">Notebooks</a>
         </li>
       </ul>
+     
       <ul class="navbar-nav my-2 my-lg-0">
-        <li class="nav-item active">
-          <a class="nav-link" href="#">{{username.title}} <span class="sr-only">(current)</span></a>
-        </li>
+        {% if user.is_authenticated %}
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              {{username.title}}
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="/users/logout/">Log Out</a>
+            </div>
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="/users/login/">{{username.title}}</a>
+          </li>
+        {% endif %}
       </ul>
   </nav>
   

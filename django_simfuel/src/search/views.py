@@ -1,13 +1,27 @@
 from django.shortcuts import render
-from django.contrib.admin.views.decorators import staff_member_required
 # Create your views here.
 from django_simfuel.views import navBarUserName
-#@staff_member_required
 from datetime import datetime
 from .forms import SearchForm
 from .models import Search
+from users.models import userModel
+from databases.models import database
+from django.contrib.auth.decorators import login_required
+import jsonpickle
+
+@login_required(login_url='login')
 def search(request):
     userInfo = navBarUserName(request)
+    userId = request.user.id
+    allowedDB = userModel.objects.get(user_id= userId).allowedDB
+
+    
+    dataBaseList = {}
+    for db in allowedDB:
+  
+        databaseDescription = database.objects.get(dbAbbreviation= db)
+        dataBaseList[databaseDescription.name] = {'description': databaseDescription.description, 'Abbreviation': databaseDescription.dbAbbreviation}
+    
     form = SearchForm()
     if request.method == 'POST':
         form = request.POST
@@ -22,8 +36,12 @@ def search(request):
         # apply query set to form
         form = SearchForm(form)
         if form.is_valid(): # if valid process and save
+            print(form.data)
             form.save()
             form = SearchForm()
+
+
+            
 
     context = {'values':[
                 {'id':1,'name':'fuel a','value':1,'fueltype':'NJFCP','project':'SAF','detail':{
@@ -89,6 +107,6 @@ def search(request):
 
     
     template_name = "search/search.html"
-    
+    context['dataBaseList']= dataBaseList
     context ={**userInfo,**context}
     return (render(request, template_name, context))

@@ -21,6 +21,19 @@
           <div style="flex: 6">
               <form class="form-inline my-2 my-lg-0">
                   <div id = 'dbList' class= 'row mt-2 mb-2 ml-2 mr-2'>
+
+                    {% for db, values in dataBaseList.items %}
+                      <div id="card {{ forloop.counter0 }}" class="card flex-row flex-wrap text-right ml-1" style="height: 8rem;">
+                          <div class="card-header border-0">
+                            <img src="//placehold.it/50" alt="" style="height: 5rem;">
+                        </div>
+                        <div class="card-block px-2">
+                            <h5 id="card-title {{ forloop.counter0 }}" class="card-title mt-2">{{ db }}</h5>
+                            <p class="card-text">{{ values.description }}</p>
+                            <button id="cardButton {{ forloop.counter0 }}" class="btn btn-primary mb-2" type="button" onclick="addDbToSelect(this)">Add</button>
+                        </div>
+                      </div>
+                      {% endfor %}
                   </div> 
               </form>
               <form method='POST'> {% csrf_token %}
@@ -43,13 +56,6 @@
 </table>	
 
 <script type="text/javascript">
-  // list available databases
-  var dataBaseList = {'CRC World Fuel Survey 2006':{'description':'Awesome description'},
-                 'Brazil Fuels':{'description':'Awesome description'},
-                 'DLR':{'description':'Awesome description'},
- }
- var htmlId = 'dbList'
-  window.onload = listDatabases(htmlId, dataBaseList);
 
   // Primary Search Table
   function expandTable($detail, index, row, data) {
@@ -96,35 +102,8 @@
   })
   }
 
- 
- // Card View of Available Databases
-
- function listDatabases(htmlId,dataBaseList){
-  var html= []
-  var i=0
-  for (var db in dataBaseList){
-    html.push(
-      `
-      <div id="card ${i}" class="card flex-row flex-wrap text-right ml-1 style="height: 8rem;">
-        <div class="card-header border-0">
-            <img src="//placehold.it/50" alt="" style="height: 5rem;">
-        </div>
-        <div class="card-block px-2">
-            <h5 id="card-title ${i}" class="card-title mt-2">${db}</h5>
-            <p class="card-text">${dataBaseList[db]['description']}</p>
-            <button id="cardButton ${i}" class="btn btn-primary mb-2" type="button" onclick="addDbToSelect(this)">Add</button>
-        </div>
-    </div>
-      `
-    )
-    i++
-  }
-  var dbList =document.getElementById(htmlId)
-  dbList.innerHTML+=html.join('')
- }
  var selectedDb = []
- function addDbToSelect(self,sDB){
-   
+ function addDbToSelect(self){
    var buttonId = self.id.split(' ')
    var id = buttonId[buttonId.length-1]
    var dbName = document.getElementById('card-title '+id).innerHTML
