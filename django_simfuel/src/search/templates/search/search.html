@@ -22,14 +22,14 @@
               <form class="form-inline my-2 my-lg-0">
                   <div id = 'dbList' class= 'row mt-2 mb-2 ml-2 mr-2'>
 
-                    {% for db, values in dataBaseList.items %}
+                    {% for database in dataBaseList %}
                       <div id="card {{ forloop.counter0 }}" class="card flex-row flex-wrap text-right ml-1" style="height: 8rem;">
                           <div class="card-header border-0">
-                            <img src="//placehold.it/50" alt="" style="height: 5rem;">
+                            <img src=" {{ database.image.url }} " alt="" style="height: 5rem;">
                         </div>
                         <div class="card-block px-2">
-                            <h5 id="card-title {{ forloop.counter0 }}" class="card-title mt-2">{{ db }}</h5>
-                            <p class="card-text">{{ values.description }}</p>
+                            <h5 id="card-title {{ forloop.counter0 }}" class="card-title mt-2">{{ database.name }}</h5>
+                            <p class="card-text">{{ database.description }}</p>
                             <button id="cardButton {{ forloop.counter0 }}" class="btn btn-primary mb-2" type="button" onclick="addDbToSelect(this)">Add</button>
                         </div>
                       </div>

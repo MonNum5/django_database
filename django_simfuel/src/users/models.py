@@ -10,4 +10,4 @@ class userModel(models.Model):
         choices.append((item.dbAbbreviation, item.name))
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    allowedDB = MultiSelectField(choices=choices, blank=True)
+    allowedDB = MultiSelectField(choices=choices, blank=True, max_length=10)

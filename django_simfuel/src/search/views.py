@@ -7,7 +7,6 @@ from .models import Search
 from users.models import userModel
 from databases.models import database
 from django.contrib.auth.decorators import login_required
-import jsonpickle
 
 @login_required(login_url='login')
 def search(request):
@@ -16,11 +15,13 @@ def search(request):
     allowedDB = userModel.objects.get(user_id= userId).allowedDB
 
     
-    dataBaseList = {}
+    objectList = []
     for db in allowedDB:
-  
-        databaseDescription = database.objects.get(dbAbbreviation= db)
-        dataBaseList[databaseDescription.name] = {'description': databaseDescription.description, 'Abbreviation': databaseDescription.dbAbbreviation}
+        try:
+            databaseDescription = database.objects.get(dbAbbreviation= db)
+            objectList.append(databaseDescription)
+        except:
+            pass
     
     form = SearchForm()
     if request.method == 'POST':
@@ -107,6 +108,6 @@ def search(request):
 
     
     template_name = "search/search.html"
-    context['dataBaseList']= dataBaseList
+    context['dataBaseList']= objectList
     context ={**userInfo,**context}
     return (render(request, template_name, context))
