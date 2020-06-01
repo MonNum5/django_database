@@ -3,7 +3,13 @@
 
 {% block content %}
 <h1>Notebook Test</h1>
-<iframe src="http://localhost:9999/notebooks/Test.ipynb" height="1000" width="1000"></iframe> 
-
-
+<div>
+    <a class="btn btn-danger" type="button" href="stop/">Stop Notebook</a>
+    <iframe src="http://localhost:9000/notebooks/Test.ipynb" height="1000" width="1000" target="_self"></iframe> 
+</div>
+<script>
+window.open = function (url, name, features, replace) {
+    $('#iframe').attr('src', url);
+}
+</script>
 {% endblock %}

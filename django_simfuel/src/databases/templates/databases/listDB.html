@@ -8,7 +8,7 @@
             <div id = 'dbList' class= 'mt-2 mb-2 ml-2 mr-2' style='width: 30%'>
 
                 {% for database in dataBaseList %}
-                  <div id="card {{ forloop.counter0 }}" class="card flex-row flex-wrap text-right mt-2" style="height: 8rem;">
+                  <div id="card {{ forloop.counter0 }}" class="card flex-row flex-wrap text-right mt-2">
                       <div class="card-header border-0">
                         <img src=" {{ database.image.url }} " alt="" style="height: 5rem;">
                     </div>
