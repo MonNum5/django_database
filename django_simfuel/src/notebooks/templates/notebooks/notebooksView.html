@@ -1,15 +1,147 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
-
 {% block content %}
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'css/stickynodes.css' %}">
+
 <h1>Notebook Test</h1>
 <div>
-    <a class="btn btn-danger" type="button" href="stop/">Stop Notebook</a>
-    <iframe src="http://localhost:9000/notebooks/Test.ipynb" height="1000" width="1000" target="_self"></iframe> 
+    <button class="btn btn-success" type="button">Create New Sticky Note</button>
+    <iframe src="http://localhost:9000/notebooks/Test.ipynb" height="1000" width="1000" target="_self"></iframe>
+    <form method='POST'> {% csrf_token %}
+        <input class="btn btn-danger" type="submit" value='Stop Notebook'/>
+        <input type="hidden" id ="notesfield" name = "notesfield" value=''>
+    </form> 
 </div>
+
+<script src="https://code.jquery.com/jquery-2.2.4.js"
+		integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
+        crossorigin="anonymous"></script>
+
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.10.3/jquery-ui.js" ></script>
+
 <script>
-window.open = function (url, name, features, replace) {
-    $('#iframe').attr('src', url);
-}
-</script>
+    (function($) {
+    
+        var markup =
+            '<div class="box note background-gray">' +
+            '<div class="box-header">' +
+            '<a href="#" class="left add hidden">&plus;</a>' +
+            '<a href="#" class="right remove hidden">&times;</a>' +
+            '</div><textarea class="note-text"></textarea></div>';
+
+        var spawn = function () {
+            $("body").append(makeNote($(markup)));
+        };
+    
+        var remove = function () {
+            var noteId = $(this).parents()[1]['id']          
+            console.log(dict)
+            delete dict[noteId]
+            console.log(dict)
+            var notes = document.getElementById('notesfield')
+            notes['value'] = JSON.stringify(dict)
+            $(this).parent().parent().remove();  
+
+        };
+    
+        var resizeTextArea = function () {
+            var self = $(this);
+            var spaceToGrab = 60;
+            self.find('.note-text').height(self.height() - 45);
+        };
+    
+        var hideButtons = function (element) {
+            $(element).find("a").hide();
+        };
+    
+        var showButtons = function (element) {
+            $(element).find("a").show();
+        };
+    
+        var save = function (noteId, value, position) {
+            dict[noteId]= {'text':value, 'position':{'top':`${position.top}px`,'left':`${position.left}px`}}
+            var notes = document.getElementById('notesfield')
+            notes['value'] = JSON.stringify(dict)
+            var notes = document.getElementById('notesfield')
+            console.log(notes['value'])
+        };
+    
+        var makeNote = function (element) {
+            var $note = $(element);
+            $note.resizable({
+                handles: "se"
+            });
+            $note.draggable({
+                handle: ".box-header"
+            });
+    
+            $text = $note.find('textarea');
+            $text.focusout(function (e) {
+                noteId = $(this).parent().attr('class').split(/\s+/)[1]
+                save(noteId, $(this).val(), $(this).parent().position());
+            });
+            $note.click(function () {
+                $(this).find('textarea').focus();
+            });
+    
+            $note.mouseover(function () {
+                showButtons(this);
+            });
+            $note.mouseout(function () {
+                hideButtons(this);
+            });
+    
+            $note.find(".add").click(spawn);
+            $note.find(".remove").click(remove);
+            $note.resize(resizeTextArea);
+            hideButtons($note);
+            return $note;
+        };
+    
+        $(".note").each(function (i, e) {
+            spawn();
+        });
+
+        var dict = {
+                    'note0':{'text':'text1', 'position':{'top':'200px','left':'200px'}},
+                    'note1':{'text':'text2', 'position':{'top':'250px','left':'250px'}},
+        }
+
+
+        $.each(dict, function (key, value) {
+            var markupLoad =
+            `<div id = ${key} class="box ${key} background-gray">` +
+            '<div class="box-header">' +
+            //'<a href="#" class="left add hidden">&plus;</a>' +
+            '<a href="#" class="right remove hidden">&times;</a>' +
+            '</div><textarea class="note-text"></textarea></div>';
+            $("body").append(makeNote($(markupLoad)));
+            $(`.${key}`).css({top: value.position.top, left: value.position.left, position:'absolute'})
+            $(`.${key}`).find('textarea').val(value.text)
+        })
+
+        $( "button" ).click(function() {
+            key = `note${Object.keys(dict).length}`
+            var markupLoad =
+            `<div id = ${key} class="box ${key} background-gray">` +
+            '<div class="box-header">' +
+            //'<a href="#" class="left add hidden">&plus;</a>' +
+            '<a href="#" class="right remove hidden">&times;</a>' +
+            '</div><textarea class="note-text"></textarea></div>';
+            $("body").append(makeNote($(markupLoad)));
+            $(`.${key}`).css({top: '100px', left: '100px', position:'absolute'})
+            $(`.${key}`).find('textarea').val('Enter Text')
+            console.log(dict)
+            dict[key] = {key:{'text':'Enter Text', 'position':{'top':'500px','left':'500px'}}}
+            var notes = document.getElementById('notesfield')
+            notes['value'] = JSON.stringify(dict);
+            console.log(dict)
+        });
+
+    })( jQuery );
+    </script>
+
+
 {% endblock %}

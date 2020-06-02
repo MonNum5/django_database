@@ -2,10 +2,10 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-<h1>Register Database</h1>
+<h1>Create Notebook</h1>
 <form method="POST" enctype="multipart/form-data" action=""> {% csrf_token %}
     {{ form|crispy }}
-    <input type = "submit" name = "Register Database"/>
+    <input type = "submit" name = "Create Notebook"/>
 
 </form>
 
