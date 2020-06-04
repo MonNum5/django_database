@@ -10,7 +10,7 @@
                 {% for database in dataBaseList %}
                   <div id="card {{ forloop.counter0 }}" class="card flex-row flex-wrap text-right mt-2">
                       <div class="card-header border-0">
-                        <img src=" {{ database.image.url }} " alt="" style="height: 5rem;">
+                        <img src="{{ database.image.url }}" alt="" style="height: 5rem;">
                     </div>
                     <div class="card-block px-2">
                         <h5 id="card-title {{ forloop.counter0 }}" class="card-title mt-2">{{ database.name }}</h5>
@@ -49,7 +49,6 @@
                     </div>
                   </div>
                   {% endfor %}
-                  <div id=dum>
                   </div>
         </div>
         <a id="RegisterNew" class="btn btn-primary mt-2 mb-2 ml-2 mr-2" type="button" href="/databases/register/" style='width: 30%'>Register New Database</a>

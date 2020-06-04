@@ -6,7 +6,11 @@
 <form method="POST" enctype="multipart/form-data" action=""> {% csrf_token %}
     {{ form|crispy }}
     <input type = "submit" name = "Create Notebook"/>
-
 </form>
+<div id='custom errors'>
+    {% if error %}
+     <p>{{ error }}</p>
+    {% endif %}
+</div>
 
 {% endblock %}

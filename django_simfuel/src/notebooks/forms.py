@@ -7,4 +7,5 @@ class notebookForm(forms.ModelForm):
         fields = [
             'name',
             'file',
+            'description'
         ]

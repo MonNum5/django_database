@@ -5,14 +5,24 @@
 
 <link rel="stylesheet" href="{% static 'css/stickynodes.css' %}">
 
-<h1>Notebook Test</h1>
-<div>
-    <button class="btn btn-success" type="button">Create New Sticky Note</button>
-    <iframe src="http://localhost:9000/notebooks/Test.ipynb" height="1000" width="1000" target="_self"></iframe>
-    <form method='POST'> {% csrf_token %}
-        <input class="btn btn-danger" type="submit" value='Stop Notebook'/>
-        <input type="hidden" id ="notesfield" name = "notesfield" value=''>
-    </form> 
+<div id="container-fluid">
+    <div>
+        <h2 class="text-center">Notebook: {{ notebook.name }}</h2>
+        <div class="text-center">
+            <div class= 'row mb-3'>
+                <div class = "col-md-6">
+                    <form method='POST'> {% csrf_token %}   
+                        <input class="btn btn-danger" type="submit" value='Stop Notebook'/>
+                        <input type="hidden" id ="notesfield" name = "notesfield" value=''>
+                    </form> 
+                </div>
+                <div class = "col-md-6">
+                    <button class="btn btn-success" type="button">Create New Sticky Note</button>
+                </div>               
+            </div>
+        <iframe src="{{ src }}" height="1000" width="1000" target="_self"></iframe>
+        </div>
+    </div>
 </div>
 
 <script src="https://code.jquery.com/jquery-2.2.4.js"
@@ -22,6 +32,8 @@
 <script src="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.10.3/jquery-ui.js" ></script>
 
 <script>
+
+    
     (function($) {
     
         var markup =
@@ -104,11 +116,7 @@
             spawn();
         });
 
-        var dict = {
-                    'note0':{'text':'text1', 'position':{'top':'200px','left':'200px'}},
-                    'note1':{'text':'text2', 'position':{'top':'250px','left':'250px'}},
-        }
-
+        var dict =  {{ notebook.notes|safe }}
 
         $.each(dict, function (key, value) {
             var markupLoad =
@@ -123,6 +131,10 @@
         })
 
         $( "button" ).click(function() {
+            if(dict === undefined) {
+                dict = {}
+            }
+            console.log(dict)
             key = `note${Object.keys(dict).length}`
             var markupLoad =
             `<div id = ${key} class="box ${key} background-gray">` +

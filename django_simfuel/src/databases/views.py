@@ -13,7 +13,7 @@ def registerDB(request):
     userInfo = navBarUserName(request)
     userId = request.user.id
     if request.method == 'POST':
-        form = dataBaseForm(request.POST)
+        form = dataBaseForm(request.POST, request.FILES)
         if form.is_valid():  
             allowedDB = userModel.objects.get(user_id= userId).allowedDB
             allowedDB.append(form.cleaned_data['dbAbbreviation'])
@@ -31,7 +31,7 @@ def updateDB(request, pk):
     form = dataBaseFormUpdate(instance=obj)
     userInfo = navBarUserName(request)
     if request.method == 'POST':
-        form = dataBaseFormUpdate(request.POST, instance=obj)
+        form = dataBaseFormUpdate(request.POST, request.FILES, instance=obj)
         if form.is_valid():
             form.save()
             return redirect("listDB")
