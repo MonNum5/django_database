@@ -36,16 +36,32 @@
                       {% endfor %}
                   </div> 
               </form>
-              <form method='POST'> {% csrf_token %}
+              <form method='POST'> {% csrf_token %}               
+                <div class= 'column mt-2 mb-2 ml-2 mr-2'>          
+                <div class="form-group">
+                  <label for="FormControlSelect1">Select Property</label>
+                  <select class="form-control" id="FormControlSelect1">
+                    <option></option>
+                    <option>density</option>
+                    <option>viscosity_kinematic</option>
+                    <option>surface_tension</option>
+                  </select>
+    
+                </div>
                 {{ form.search|as_crispy_field }}
-                <div class= 'row mt-2 mb-2 ml-2 mr-2'>
-                </div> 
-                <input class = 'btn btn-success' type='submit' value='Save' />
+                <input class = 'btn btn-success mb-2' type='submit' value='Search' />
                 <input type="hidden" id ="selectedDbField" name = "selectedDbField" value=''>
+                <input type="hidden" id ="selectedDbCardIdField" name = "selectedDbCardIdField" value=''>
+                
+                <input type="hidden" id ="propertyField" name = "propertyField" value=''>
+              </div> 
               </form>
           </div>
       </div>
   </form>
+  {% if error %}
+     <p>{{ error }}</p>
+  {% endif %}
 </div>
 
 <table id="table" 
@@ -57,17 +73,94 @@
 
 <script type="text/javascript">
 
+  $('#FormControlSelect1').change(function(){
+    var prop = document.getElementById('propertyField')
+    prop['value'] = $(this).find(':selected').text()
+});
+
+/*
+if ("{{ selectedDBlist }}"){
+    var selectedDb = JSON.parse("{{ selectedDBlist|escapejs }}")
+    var cardIdList = JSON.parse("{{ CardId|escapejs }}")
+    console.log(selectedDb)
+    console.log(cardIdList)
+
+    for (lid in cardIdList){
+      var card = document.getElementById(id)
+      card.style.background  = "PaleGreen"
+    }
+    //self.className = "btn btn-danger"
+    //self.innerHTML = "Remove"
+    var buttonId = self.id.split(' ')
+    var id = buttonId[buttonId.length-1]
+    var card = document.getElementById('card '+id)
+    card.style.background  = "PaleGreen"
+    dbName = document.getElementById('card-title '+id)
+
+  } else {
+    var selectedDb = []
+    console.log(selectedDb)
+
+  }*/
+  var data ="{{ values|escapejs }}"
+  if (data.length!==0 && data!=="[]") {
+    data = JSON.parse(data)
+    var doc = {{ detail|safe }}[0]
+
+    var $table = $('#table');
+        var $data = data
+        var $doc = doc
+        //console.log(data)
+        var columnNames = Object.keys(data[0])
+   
+        columnNames = columnNames.filter(function(x) { return x !== 'detail' })
+        var $columns = []
+        $.each(columnNames, function (key) {
+
+        $columns.push({
+          field: columnNames[key],
+          title: columnNames[key],
+          sortable: true,
+          align: 'center'
+        })
+        })
+
+
+        $(function () {
+          $('#table').bootstrapTable('destroy').bootstrapTable({
+      onExpandRow: function (index, row, $detail, $doc) {
+  
+        expandTable($detail, index, row, $doc)
+      },
+      data: $data,
+      height: 550,
+      columns: $columns
+  })
+  })
+
+    
+  }
+
   // Primary Search Table
-  function expandTable($detail, index, row, data) {
+  function expandTable($detail, index, row, $doc) {
     var html = []
-    var header = row['detail']['header']
+    var id = row['_id']
+    
+    var header = doc[id]['header']
+ 
     $.each(header, function (key, value) {
       html.push('<p><b>' + key + ':</b> ' + value + '</p>')
     })
-    accordion = accordionDetailFuelData(row['id'],row['detail']['properties'])
-    
-    html.push(accordion)
-
+    var col = 
+    accordion_prop = accordionDetailFuelData(row['id'],doc[id]['property'],'property')
+    html.push(accordion_prop)
+    accordion_comp = accordionDetailFuelData(row['id'],doc[id]['composition'],'composition')
+    html.push(accordion_comp)
+    accordion_changelog = accordionDetailFuelData(row['id'],doc[id]['change_log'],'change_log')
+    html.push(accordion_changelog)
+    console.log(doc[id])
+    //accordion_changelog = accordionChangelog(row['id'], doc[id]['change_log'], 'changelog')
+    //html.push(accordionChangeLog)
     html.push(`<a href="edit/${row['id']}" class="btn btn-primary mt-3" type="button">Edit</a>`)
 
     $detail.html(html)
@@ -92,7 +185,7 @@
         $(function () {
           $('#table').bootstrapTable('destroy').bootstrapTable({
       onExpandRow: function (index, row, $detail, $data) {
-        /* eslint no-use-before-define: ["error", { "functions": false }]*/
+  
         expandTable($detail, index, row, data)
       },
       data: $data,
@@ -101,8 +194,8 @@
   })
   })
   }
-
- var selectedDb = []
+var selectedDb = []
+var selectedDbCardId = []
  function addDbToSelect(self){
    var buttonId = self.id.split(' ')
    var id = buttonId[buttonId.length-1]
@@ -116,6 +209,7 @@
     const index = selectedDb.indexOf(dbName);
     if (index > -1) {
       selectedDb.splice(index, 1);
+      selectedDbCardId.splice(index, 1);
     }
    }
    else {
@@ -127,26 +221,29 @@
     card.style.background  = "PaleGreen"
     dbName = document.getElementById('card-title '+id)
     selectedDb.push(dbName.innerHTML)
+    selectedDbCardId.push('card '+id)
 
    }
    var selectedDbField = document.getElementById('selectedDbField')
    selectedDbField['value'] = selectedDb
+   var selectedDbCardIdField = document.getElementById('selectedDbCardIdField')
+   selectedDbCardIdField['value'] = selectedDbCardId
  }
 
  // accordion with detail view of fuel data
- function accordionDetailFuelData(id, data){
-   customBootstrapTable(id,data)
+ function accordionDetailFuelData(id, data, key){
+   customBootstrapTable(id,data, key)
    html = `
   <div id="accordion">
-    <div class="card" id="card${id}">
-      <div class="card-header" id="heading${id}">
+    <div class="card" id="card${key}${id}">
+      <div class="card-header" id="heading${key}${id}">
         <h5 class="mb-0">
-          <button id="card-btn${id}" class="btn btn" data-toggle="collapse" data-target="#collapse${id}" aria-expanded="false" aria-controls="#collapse${id}">Properties</button>
+          <button id="card-btn${key}${id}" class="btn btn" data-toggle="collapse" data-target="#collapse${key}${id}" aria-expanded="false" aria-controls="#collapse${key}${id}">${key}</button>
         </h5>
       </div>
-      <div id="collapse${id}" class="collapse show" aria-labelledby="heading${id}" data-parent="#accordion">
+      <div id="collapse${key}${id}" class="collapse" aria-labelledby="heading${key}${id}" data-parent="#accordion">
         <div class="card-body">
-          <table id=table${id}
+          <table id=table${key}${id}
           >
         </table>	
         </div>
@@ -157,29 +254,33 @@
   return(html)
 }
 
-function customBootstrapTable(id,data){
+function customBootstrapTable(id, data, key){
 
-  var $table = $(`#table${id}`);
+  var $table = $(`#table${key}${id}`);
   var $data = data
-  var columnNames = ["property","test_method","unit","value","information"]
+  if (key === 'change_log'){
+    var columnNames = ["Version","Change",'Timestamp','User']
+  }
+  else {
+    var columnNames = ["property","test_method","unit","value","information"]
+  }
   var $columns = []
-  $.each(columnNames, function (key) {
+  $.each(columnNames, function (k) {
 
   $columns.push({
-    field: columnNames[key],
-    title: columnNames[key],
+    field: columnNames[k],
+    title: columnNames[k],
     sortable: true,
     align: 'center'
   })
   })
 
   $(function () {
-    $(`#table${id}`).bootstrapTable('destroy').bootstrapTable({
+    $(`#table${key}${id}`).bootstrapTable('destroy').bootstrapTable({
 data: $data,
 columns: $columns
 })
 })
-
 
 }
 
