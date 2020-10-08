@@ -1,0 +1,682 @@
+{
+    "header": {
+        "name": "dvfeiyge",
+        "fuel_ID": "zfleaqnd",
+        "description": "euqvcqkx",
+        "country": "ngkqnbqz",
+        "city": "ugxbcrfm",
+        "blend": "igejyyjx",
+        "author": "pqfoeqtq",
+        "timestamp": "2020-03-20 11:28:09",
+        "version": "2-0-0",
+        "main_source": {
+            "file": "avtcfzxi",
+            "page": 1,
+            "original_fuel_ID": "scpeafjp",
+            "GCxGC_file": "pedsetmh"
+        },
+        "fuel_type": "JetA",
+        "project": "pxdzdnmf"
+    },
+    "composition": {
+        "saturates": [
+            {
+                "test_method": "D1319",
+                "unit": "vol%",
+                "value": 54.43929686375558
+            }
+        ],
+        "monoaromatics": [
+            {
+                "test_method": "D6379",
+                "unit": "vol%",
+                "value": 7.568355219761291
+            }
+        ],
+        "diaromatics": [
+            {
+                "test_method": "D6379",
+                "unit": "vol%",
+                "value": 50.449769385747686
+            }
+        ],
+        "aromatics_total": [
+            {
+                "test_method": "D6379",
+                "unit": "vol%",
+                "value": 41.73578696053597
+            },
+            {
+                "test_method": "D1319",
+                "unit": "vol%",
+                "value": 51.21089784187652
+            }
+        ],
+        "saturates_total": [
+            {
+                "test_method": "D6379",
+                "unit": "vol%",
+                "value": 8.946230690473678
+            }
+        ],
+        "benzene": [
+            {
+                "test_method": "GC/MS",
+                "unit": "ug/ml",
+                "value": 5.977144200942519
+            }
+        ],
+        "naphthalene": [
+            {
+                "test_method": "GC/MS",
+                "unit": "ug/ml",
+                "value": 38.61893436839489
+            },
+            {
+                "test_method": "D2425",
+                "unit": "mass%",
+                "value": 79.86790574352602
+            }
+        ],
+        "cycloparaffins": [
+            {
+                "test_method": "D2425",
+                "unit": "mass%",
+                "value": 79.15071023974008
+            }
+        ],
+        "dicycloparaffins": [
+            {
+                "test_method": "D2425",
+                "unit": "mass%",
+                "value": 13.157006748844747
+            }
+        ],
+        "tricycloparaffins": [
+            {
+                "test_method": "D2425",
+                "unit": "mass%",
+                "value": 65.96642982092065
+            }
+        ],
+        "alkylbenzenes": [
+            {
+                "test_method": "D2425",
+                "unit": "mass%",
+                "value": 8.46296815132046
+            }
+        ],
+        "indan_and_teralins": [
+            {
+                "test_method": "D2425",
+                "unit": "mass%",
+                "value": 48.073934331292925
+            }
+        ],
+        "indenes_CnH2n-10": [
+            {
+                "test_method": "D2425",
+                "unit": "mass%",
+                "value": 96.7914079940895
+            }
+        ],
+        "naphthalenes": [
+            {
+                "test_method": "D2425",
+                "unit": "mass%",
+                "value": 66.50434024831219
+            },
+            {
+                "test_method": "D1840",
+                "unit": "vol%",
+                "value": 46.14877630027658
+            }
+        ],
+        "acenaphthenes": [
+            {
+                "test_method": "D2425",
+                "unit": "mass%",
+                "value": 78.7119310745505
+            }
+        ],
+        "acenaphthylenes": [
+            {
+                "test_method": "D2425",
+                "unit": "mass%",
+                "value": 7.010701131114061
+            }
+        ],
+        "sulfur_mercaptan": [
+            {
+                "test_method": "D3227",
+                "unit": "mass%",
+                "value": 83.68951386819651
+            }
+        ],
+        "thiols_sulfides_disulfides": [
+            {
+                "test_method": "",
+                "unit": "ppm-m",
+                "value": 56.17390510193005
+            }
+        ],
+        "thiophenes": [
+            {
+                "test_method": "",
+                "unit": "ppm-m",
+                "value": 4.892451076649607
+            }
+        ],
+        "benzothiophenes": [
+            {
+                "test_method": "",
+                "unit": "ppm-m",
+                "value": 21.33072442282019
+            }
+        ],
+        "dibenzothiophenes": [
+            {
+                "test_method": "",
+                "unit": "ppm-m",
+                "value": 68.10553082540075
+            }
+        ],
+        "hydrogen_content": [
+            {
+                "test_method": "D3701",
+                "unit": "mass%",
+                "value": 41.492219994114244
+            }
+        ],
+        "sulfur_total": [
+            {
+                "test_method": "D2622",
+                "unit": "mass%",
+                "value": 11.654851574918744
+            },
+            {
+                "test_method": "",
+                "unit": "mass%",
+                "value": 65.7331315601894
+            }
+        ],
+        "olefins_total": [
+            {
+                "test_method": "D1159",
+                "unit": "vol%",
+                "value": 48.593350378204434
+            }
+        ],
+        "paraffins_total": [
+            {
+                "test_method": "D2425",
+                "unit": "mass%",
+                "value": 38.013761545483206
+            }
+        ],
+        "tricycloaromatics": [
+            {
+                "test_method": "D2425",
+                "unit": "mass%",
+                "value": 37.32947350082221
+            }
+        ]
+    },
+    "property": {
+        "density": [
+            {
+                "test_method": "D4052",
+                "unit": "kg/m3",
+                "value": 747.5562116026811,
+                "temperature_unit": "C",
+                "temperature_value": -35.0
+            },
+            {
+                "test_method": "D4052",
+                "unit": "kg/m3",
+                "value": 851.1322618184248,
+                "temperature_unit": "C",
+                "temperature_value": -18.4
+            },
+            {
+                "test_method": "D4052",
+                "unit": "kg/m3",
+                "value": 801.6276906870365,
+                "temperature_unit": "C",
+                "temperature_value": -0.4
+            },
+            {
+                "test_method": "D4052",
+                "unit": "kg/m3",
+                "value": 778.08305173557,
+                "temperature_unit": "C",
+                "temperature_value": 19.8
+            },
+            {
+                "test_method": "D4052",
+                "unit": "kg/m3",
+                "value": 899.2276447186246,
+                "temperature_unit": "C",
+                "temperature_value": 39.6
+            },
+            {
+                "test_method": "D4052",
+                "unit": "kg/m3",
+                "value": 705.3795315594865,
+                "temperature_unit": "C",
+                "temperature_value": 69.4
+            },
+            {
+                "test_method": "D4052",
+                "unit": "kg/m3",
+                "value": 824.6661949643948,
+                "temperature_unit": "C",
+                "temperature_value": 15.5555555555556
+            }
+        ],
+        "flash_point": [
+            {
+                "test_method": "D93",
+                "unit": "C",
+                "value": 55.998820714630114
+            }
+        ],
+        "freezing_point": [
+            {
+                "test_method": "D5972",
+                "unit": "C",
+                "value": -65.60007726892746
+            }
+        ],
+        "pour_point": [
+            {
+                "test_method": "D5949",
+                "unit": "C",
+                "value": -61.37430187781568
+            }
+        ],
+        "viscosity_kinematic": [
+            {
+                "test_method": "D445",
+                "unit": "mm2/s",
+                "value": 12.380469942702138,
+                "temperature_unit": "C",
+                "temperature_value": 20.0
+            },
+            {
+                "test_method": "D445",
+                "unit": "mm2/s",
+                "value": 17.29273940764429,
+                "temperature_unit": "C",
+                "temperature_value": -20.0
+            },
+            {
+                "test_method": "D445",
+                "unit": "mm2/s",
+                "value": 11.55494271952601,
+                "temperature_unit": "C",
+                "temperature_value": -40.0
+            }
+        ],
+        "electrical_conductivity": [
+            {
+                "test_method": "D2624",
+                "unit": "pS/m",
+                "value": 12.353468651536446,
+                "temperature_unit": "C",
+                "temperature_value": 5.555555555555543
+            },
+            {
+                "test_method": "D2624",
+                "unit": "pS/m",
+                "value": 9.75484033626088,
+                "temperature_unit": "C",
+                "temperature_value": 22.222222222222285
+            },
+            {
+                "test_method": "D2624",
+                "unit": "pS/m",
+                "value": 6.994879979284985,
+                "temperature_unit": "C",
+                "temperature_value": 37.77777777777783
+            }
+        ],
+        "distillation": [
+            {
+                "test_method": "D86",
+                "unit": "C",
+                "value": 244.40176491847132,
+                "volume_evaporated_unit": "%",
+                "volume_evaporated_value": 0.0,
+                "information": "test 1"
+            },
+            {
+                "test_method": "D86",
+                "unit": "C",
+                "value": 151.88015170279016,
+                "volume_evaporated_unit": "%",
+                "volume_evaporated_value": 0.0,
+                "information": "test 2"
+            },
+            {
+                "test_method": "D86",
+                "unit": "C",
+                "value": 179.06593457328603,
+                "volume_evaporated_unit": "%",
+                "volume_evaporated_value": 10.0,
+                "information": "test 1"
+            },
+            {
+                "test_method": "D86",
+                "unit": "C",
+                "value": 235.35952281088004,
+                "volume_evaporated_unit": "%",
+                "volume_evaporated_value": 10.0,
+                "information": "test 2"
+            },
+            {
+                "test_method": "D86",
+                "unit": "C",
+                "value": 160.35779513651198,
+                "volume_evaporated_unit": "%",
+                "volume_evaporated_value": 20.0,
+                "information": "test 1"
+            },
+            {
+                "test_method": "D86",
+                "unit": "C",
+                "value": 146.86495126386612,
+                "volume_evaporated_unit": "%",
+                "volume_evaporated_value": 20.0,
+                "information": "test 2"
+            },
+            {
+                "test_method": "D86",
+                "unit": "C",
+                "value": 140.29697981967286,
+                "volume_evaporated_unit": "%",
+                "volume_evaporated_value": 50.0,
+                "information": "test 1"
+            },
+            {
+                "test_method": "D86",
+                "unit": "C",
+                "value": 223.27279263887766,
+                "volume_evaporated_unit": "%",
+                "volume_evaporated_value": 50.0,
+                "information": "test 2"
+            },
+            {
+                "test_method": "D86",
+                "unit": "C",
+                "value": 192.34472883887253,
+                "volume_evaporated_unit": "%",
+                "volume_evaporated_value": 90.0,
+                "information": "test 1"
+            },
+            {
+                "test_method": "D86",
+                "unit": "C",
+                "value": 201.5229361552594,
+                "volume_evaporated_unit": "%",
+                "volume_evaporated_value": 90.0,
+                "information": "test 2"
+            },
+            {
+                "test_method": "D86",
+                "unit": "C",
+                "value": 140.9398617167223,
+                "volume_evaporated_unit": "%",
+                "volume_evaporated_value": 100.0,
+                "information": "test 1"
+            },
+            {
+                "test_method": "D86",
+                "unit": "C",
+                "value": 238.59263456314542,
+                "volume_evaporated_unit": "%",
+                "volume_evaporated_value": 100.0,
+                "information": "test 2"
+            }
+        ],
+        "distillation_residue": [
+            {
+                "test_method": "D1218",
+                "unit": "vol%",
+                "value": 0.5070340122669139,
+                "information": "test 1"
+            },
+            {
+                "test_method": "D1218",
+                "unit": "vol%",
+                "value": 1.633710657406934,
+                "information": "test 2"
+            }
+        ],
+        "refractive_index": [
+            {
+                "test_method": "D1218",
+                "unit": "-",
+                "value": 1.0164255146188053,
+                "temperature_unit": "C",
+                "temperature_value": 20.0
+            }
+        ],
+        "net_heat_of_combustion": [
+            {
+                "test_method": "D4809",
+                "unit": "MJ/kg",
+                "value": 41.367064010518554
+            }
+        ],
+        "net_heat_of_combustion_calculated": [
+            {
+                "test_method": "D3338",
+                "unit": "MJ/kg",
+                "value": 43.739541791775004
+            }
+        ],
+        "specific_heat_capacitiy_slope": [
+            {
+                "test_method": "E1269",
+                "unit": "J/gK",
+                "value": 41.524308956238414
+            }
+        ],
+        "specific_heat_capacity": [
+            {
+                "test_method": "E1269",
+                "unit": "kJ/(kg*K)",
+                "value": 1.9702228374640485,
+                "temperature_unit": "C",
+                "temperature_value": -30.0
+            },
+            {
+                "test_method": "E1269",
+                "unit": "kJ/(kg*K)",
+                "value": 1.9666315111987358,
+                "temperature_unit": "C",
+                "temperature_value": 0.0
+            },
+            {
+                "test_method": "E1269",
+                "unit": "kJ/(kg*K)",
+                "value": 1.5539699327911058,
+                "temperature_unit": "C",
+                "temperature_value": 15.0
+            },
+            {
+                "test_method": "E1269",
+                "unit": "kJ/(kg*K)",
+                "value": 1.0118325152822532,
+                "temperature_unit": "C",
+                "temperature_value": 20.0
+            },
+            {
+                "test_method": "E1269",
+                "unit": "kJ/(kg*K)",
+                "value": 1.1746502606120817,
+                "temperature_unit": "C",
+                "temperature_value": 140.0
+            }
+        ],
+        "thermal_stability_breakpoint": [
+            {
+                "test_method": "D3241",
+                "unit": "C",
+                "value": 262.72794451021167
+            }
+        ],
+        "lubricity_bocle": [
+            {
+                "test_method": "D5001",
+                "unit": "mm",
+                "value": 0.42991487454687494
+            }
+        ],
+        "surface_tension": [
+            {
+                "test_method": "D971",
+                "unit": "mN/m",
+                "value": 26.590103982140665,
+                "temperature_unit": "C",
+                "temperature_value": 22.222222222222285
+            },
+            {
+                "test_method": "D971",
+                "unit": "mN/m",
+                "value": 22.247831105099188,
+                "temperature_unit": "C",
+                "temperature_value": -10.0
+            },
+            {
+                "test_method": "D971",
+                "unit": "mN/m",
+                "value": 26.854028232187304,
+                "temperature_unit": "C",
+                "temperature_value": 40.0
+            }
+        ],
+        "dielectric_constant": [
+            {
+                "test_method": "K-Cell",
+                "unit": "K",
+                "value": 2.1505102420713187,
+                "temperature_unit": "C",
+                "temperature_value": -36.6
+            },
+            {
+                "test_method": "K-Cell",
+                "unit": "K",
+                "value": 2.5134608339717848,
+                "temperature_unit": "C",
+                "temperature_value": -0.4
+            },
+            {
+                "test_method": "K-Cell",
+                "unit": "K",
+                "value": 2.615129382475844,
+                "temperature_unit": "C",
+                "temperature_value": -0.4
+            },
+            {
+                "test_method": "K-Cell",
+                "unit": "K",
+                "value": 2.1007892012119878,
+                "temperature_unit": "C",
+                "temperature_value": 19.8
+            },
+            {
+                "test_method": "K-Cell",
+                "unit": "K",
+                "value": 2.124110972021988,
+                "temperature_unit": "C",
+                "temperature_value": 39.8
+            },
+            {
+                "test_method": "K-Cell",
+                "unit": "K",
+                "value": 2.176196210033533,
+                "temperature_unit": "C",
+                "temperature_value": 69.6
+            }
+        ],
+        "speed_of_sound": [
+            {
+                "test_method": "",
+                "unit": "m/s",
+                "value": 1564.9297493446802,
+                "temperature_unit": "C",
+                "temperature_value": -35.0
+            },
+            {
+                "test_method": "",
+                "unit": "m/s",
+                "value": 1430.0000207753178,
+                "temperature_unit": "C",
+                "temperature_value": -18.4
+            },
+            {
+                "test_method": "",
+                "unit": "m/s",
+                "value": 1537.4438513479422,
+                "temperature_unit": "C",
+                "temperature_value": -18.4
+            },
+            {
+                "test_method": "",
+                "unit": "m/s",
+                "value": 1828.4069474425285,
+                "temperature_unit": "C",
+                "temperature_value": -0.4
+            },
+            {
+                "test_method": "",
+                "unit": "m/s",
+                "value": 1805.677952020574,
+                "temperature_unit": "C",
+                "temperature_value": -35.0
+            },
+            {
+                "test_method": "",
+                "unit": "m/s",
+                "value": 1975.213328064005,
+                "temperature_unit": "C",
+                "temperature_value": -18.4
+            },
+            {
+                "test_method": "",
+                "unit": "m/s",
+                "value": 1355.8511498900602,
+                "temperature_unit": "C",
+                "temperature_value": -0.4
+            }
+        ],
+        "acidity_total": [
+            {
+                "test_method": "D3242",
+                "unit": "mg KOH/g",
+                "value": 0.11770659175099663
+            }
+        ],
+        "visual": [
+            {
+                "test_method": "",
+                "unit": "rating",
+                "value": []
+            }
+        ]
+    },
+    "change_log": {
+        "2-0-0": {
+            "Change": [
+                "wwicdksa"
+            ],
+            "Timestamp": "31/10/2019, 13:47:30"
+        },
+        "1-0-0": [
+            "-"
+        ],
+        "Timestamp": "-"
+    }
+}
