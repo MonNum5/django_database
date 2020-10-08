@@ -12,6 +12,7 @@ This repo is for demonstrational purposes only. The platform will NOT run solely
 
 
 File / Folder | Description
+--- | --- 
 assets | images and gif for Readme
 django_simfuel | django code (python, javascript, html)
 DummyDB | folder with dummy data to load into the MongoDB database
