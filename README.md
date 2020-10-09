@@ -20,14 +20,20 @@ crate_dummy_database.py | python file to create dummy data of chemical mixtures
 Readme | readme
 requirements.txt | python requirements
 
+## Login page
 ![Login](assets/Login-page.png)
 
+## Django admin backend
 ![Django-Admin](assets/Django-Admin.png)
 
+## Search of chemical mixtures database 1
 ![Search-1](assets/Search-1.png)
 
+## Search of chemical mixtures database 2
 ![Search-2](assets/Search-2.png)
 
+## Integrated Jupyter notebok
 ![Notebook](assets/Notebook-page.png)
 
+## Gif of general functionality
 ![](assets/Platform.gif)
